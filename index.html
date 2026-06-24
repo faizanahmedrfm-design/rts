@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Premium Sunrise Hero</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --cream: #f8f3ea;
+      --white: #ffffff;
+      --text-light: rgba(255, 255, 255, 0.92);
+      --text-soft: rgba(255, 255, 255, 0.78);
+      --gold: #d7a95f;
+      --gold-deep: #b98944;
+      --glass-border: rgba(255, 255, 255, 0.22);
+      --shadow-soft: 0 22px 70px rgba(10, 7, 4, 0.45);
+      --radius-xl: 30px;
+      --radius-pill: 999px;
+      --transition: 0.35s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #060606;
+      color: var(--text-light);
+    }
+
+    /* ---------- HEADER ---------- */
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 20;
+      padding: 16px 0;
+      pointer-events: none;
+    }
+
+    .header-inner {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: radial-gradient(circle at top left, rgba(255,255,255,0.18), transparent 62%);
+      background-color: rgba(11,10,9,0.46);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(20px) saturate(130%);
+      -webkit-backdrop-filter: blur(20px) saturate(130%);
+      box-shadow: 0 18px 45px rgba(3,2,1,0.55);
+      pointer-events: auto;
+    }
+
+    .brand-mark {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .nav-inline {
+      display: flex;
+      align-items: center;
+      gap: 1.3rem;
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .nav-inline span {
+      position: relative;
+      cursor: default;
+    }
+
+    .nav-inline span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 18px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(215,169,95,0.0), rgba(215,169,95,0.9), rgba(215,169,95,0.0));
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.42);
+      border: 1px solid rgba(255,255,255,0.18);
+      font-size: 0.78rem;
+    }
+
+    .nav-cta strong { color: #fff; }
+
+    @media (max-width: 780px) {
+      .header-inner {
+        padding-inline: 16px;
+        gap: 1rem;
+      }
+      .nav-inline { display: none; }
+    }
+
+    /* ---------- HERO ---------- */
+
+    .premium-hero {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      isolation: isolate;
+      background: #151515;
+    }
+
+    .hero-bg-wrap,
+    .hero-bg,
+    .hero-overlay,
+    .hero-gradient,
+    .sun-glow,
+    .sun-rays,
+    .particles,
+    .hero-parallax-layer {
+      position: absolute;
+      inset: 0;
+    }
+
+    .hero-bg {
+      background:
+        url("https://snow-wolverine-583907.hostingersite.com/wp-content/uploads/2026/04/hero-section-image.png")
+        center center / cover no-repeat;
+      transform: scale(1.1);
+      will-change: transform;
+      animation: bgZoom 18s ease-in-out infinite alternate;
+    }
+
+    .hero-overlay {
+      background:
+        linear-gradient(110deg, rgba(20, 18, 18, 0.5), rgba(20, 18, 18, 0.2) 36%, rgba(20, 18, 18, 0.64)),
+        radial-gradient(circle at 32% 16%, rgba(255, 219, 159, 0.32), transparent 18%);
+    }
+
+    .hero-gradient {
+      background:
+        linear-gradient(to bottom, rgba(255, 200, 146, 0.18), transparent 40%),
+        linear-gradient(to top, rgba(12, 10, 10, 0.82), rgba(10, 8, 7, 0.2) 45%, rgba(255, 218, 170, 0.08));
+      pointer-events: none;
+    }
+
+    .sun-glow {
+      width: 360px;
+      height: 360px;
+      top: 2%;
+      left: 22%;
+      inset: auto;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255, 244, 204, 1) 0%, rgba(255, 214, 139, 0.7) 24%, rgba(255, 196, 108, 0.25) 48%, transparent 72%);
+      filter: blur(10px);
+      animation: sunFloat 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .sun-rays {
+      width: 560px;
+      height: 560px;
+      top: -5%;
+      left: 18%;
+      inset: auto;
+      border-radius: 50%;
+      background:
+        conic-gradient(
+          from 0deg,
+          rgba(255, 224, 168, 0.00) 0deg,
+          rgba(255, 224, 168, 0.26) 14deg,
+          rgba(255, 224, 168, 0.00) 28deg,
+          rgba(255, 224, 168, 0.18) 46deg,
+          rgba(255, 224, 168, 0.00) 64deg,
+          rgba(255, 224, 168, 0.22) 84deg,
+          rgba(255, 224, 168, 0.00) 104deg,
+          rgba(255, 224, 168, 0.18) 124deg,
+          rgba(255, 224, 168, 0.00) 148deg,
+          rgba(255, 224, 168, 0.16) 172deg,
+          rgba(255, 224, 168, 0.00) 198deg,
+          rgba(255, 224, 168, 0.22) 222deg,
+          rgba(255, 224, 168, 0.00) 246deg,
+          rgba(255, 224, 168, 0.18) 270deg,
+          rgba(255, 224, 168, 0.00) 300deg,
+          rgba(255, 224, 168, 0.22) 330deg,
+          rgba(255, 224, 168, 0.00) 360deg
+        );
+      filter: blur(10px);
+      opacity: 0.8;
+      animation: raysSpin 32s linear infinite, raysPulse 9s ease-in-out infinite;
+      pointer-events: none;
+      mask: radial-gradient(circle, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.38) 28%, transparent 72%);
+      -webkit-mask: radial-gradient(circle, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.38) 28%, transparent 72%);
+    }
+
+    .hero-parallax-layer.layer-one {
+      background:
+        radial-gradient(circle at 78% 25%, rgba(255, 223, 184, 0.12), transparent 22%),
+        radial-gradient(circle at 12% 80%, rgba(255, 188, 115, 0.08), transparent 24%);
+      pointer-events: none;
+    }
+
+    .hero-parallax-layer.layer-two {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.06), transparent 30%),
+        radial-gradient(circle at 60% 70%, rgba(255,255,255,0.06), transparent 18%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      padding: 140px 0 120px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 640px;
+      padding: 40px 40px 32px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.08));
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px) saturate(128%);
+      -webkit-backdrop-filter: blur(20px) saturate(128%);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+      transform: translate3d(0, 26px, 0);
+      opacity: 0;
+      animation: cardEnter 1s cubic-bezier(.2,.8,.2,1) forwards 0.2s,
+                 glassFloat 7s ease-in-out infinite 1.3s;
+    }
+
+    .hero-content::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(115deg, rgba(255,255,255,0.18), transparent 40%),
+        radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 24%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 14px;
+      color: #f3d7aa;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.9));
+    }
+
+    .hero-title {
+      margin: 0 0 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      font-size: clamp(48px, 7vw, 84px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      text-shadow: 0 10px 26px rgba(0, 0, 0, 0.25);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-subtitle {
+      margin: 0;
+      max-width: 56ch;
+      color: var(--text-soft);
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .hero-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 26px;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      overflow: hidden;
+      border: 1px solid transparent;
+      transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        color var(--transition);
+    }
+
+    .hero-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translateX(-120%);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+      transition: transform 0.7s ease;
+    }
+
+    .hero-btn:hover::before {
+      transform: translateX(120%);
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .hero-btn-primary {
+      background: radial-gradient(circle at 12% 0, #ffe6b8 0%, #d7a95f 28%, #b98944 100%);
+      color: #fff;
+      box-shadow: 0 18px 40px rgba(185, 137, 68, 0.55);
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    .hero-btn-primary:hover {
+      box-shadow: 0 24px 50px rgba(185, 137, 68, 0.7);
+    }
+
+    .hero-btn-secondary {
+      color: #fff;
+      border-color: rgba(255,255,255,0.26);
+      background: rgba(9, 7, 6, 0.45);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.45);
+    }
+
+    .hero-btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+
+    .particles {
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: var(--size);
+      height: var(--size);
+      left: var(--x);
+      top: var(--y);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,223,178,0.25) 55%, transparent 72%);
+      opacity: 0;
+      animation: particleFloat var(--duration) linear infinite;
+      animation-delay: var(--delay);
+      filter: blur(var(--blur));
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      z-index: 4;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-mouse::before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      width: 4px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.9);
+      transform: translateX(-50%);
+      animation: scrollDot 2s ease-in-out infinite;
+    }
+
+    .scroll-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+    }
+
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: revealUp 0.9s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+
+    .delay-1 { animation-delay: 0.35s; }
+    .delay-2 { animation-delay: 0.5s; }
+    .delay-3 { animation-delay: 0.7s; }
+    .delay-4 { animation-delay: 0.95s; }
+    .delay-5 { animation-delay: 1.15s; }
+
+    @keyframes bgZoom {
+      0%   { transform: scale(1.07); }
+      100% { transform: scale(1.16); }
+    }
+
+    @keyframes sunFloat {
+      0%   { transform: translate3d(0,0,0) scale(1); opacity: 0.95; }
+      50%  { transform: translate3d(10px,-8px,0) scale(1.04); opacity: 1; }
+      100% { transform: translate3d(-8px,10px,0) scale(0.98); opacity: 0.9; }
+    }
+
+    @keyframes raysSpin {
+      from { transform: rotate(0deg) scale(1); }
+      to   { transform: rotate(360deg) scale(1.02); }
+    }
+
+    @keyframes raysPulse {
+      0%,100% { opacity: 0.46; }
+      50%     { opacity: 0.85; }
+    }
+
+    @keyframes cardEnter {
+      to {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+      }
+    }
+
+    @keyframes glassFloat {
+      0%,100% { transform: translate3d(0,0,0); }
+      50%     { transform: translate3d(0,-8px,0); }
+    }
+
+    @keyframes revealUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes particleFloat {
+      0% {
+        transform: translate3d(0, 20px, 0) scale(0.7);
+        opacity: 0;
+      }
+      12% {
+        opacity: var(--peak, 0.8);
+      }
+      65% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translate3d(var(--drift), -120px, 0) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes scrollDot {
+      0%,100% { transform: translate3d(-50%,0,0); opacity: 0.9; }
+      50%     { transform: translate3d(-50%,12px,0); opacity: 0.1; }
+    }
+
+    @media (max-width: 960px) {
+      .hero-inner {
+        padding: 126px 0 110px;
+      }
+      .hero-content {
+        max-width: 100%;
+        padding: 32px 26px 28px;
+      }
+      .sun-glow {
+        width: 260px;
+        height: 260px;
+        left: 18%;
+      }
+      .sun-rays {
+        width: 420px;
+        height: 420px;
+        left: 12%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-header {
+        padding: 10px 0;
+      }
+      .hero-inner {
+        padding: 118px 0 90px;
+      }
+      .hero-title {
+        font-size: clamp(40px, 12vw, 60px);
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+      .hero-btn {
+        width: 100%;
+      }
+      .scroll-indicator {
+        bottom: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg,
+      .sun-glow,
+      .sun-rays,
+      .hero-content,
+      .particle,
+      .reveal-item {
+        animation: none !important;
+      }
+      .hero-bg {
+        transform: scale(1.08);
+      }
+      .hero-content,
+      .reveal-item {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <div class="brand-mark">Shearing Shed</div>
+        <div class="brand-sub">Motor Inn · Dubbo</div>
+      </div>
+      <div class="nav-inline">
+        <span>Rooms</span>
+        <span>Facilities</span>
+        <span>Stay Packages</span>
+      </div>
+      <div class="nav-cta">
+        <span>Call</span> <strong>02 6884 2977</strong>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="premium-hero" id="hero">
+    <div class="hero-bg-wrap">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-gradient"></div>
+      <div class="sun-glow"></div>
+      <div class="sun-rays"></div>
+      <div class="particles" id="particles"></div>
+    </div>
+
+    <div class="hero-parallax-layer layer-one"></div>
+    <div class="hero-parallax-layer layer-two"></div>
+
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <span class="hero-eyebrow reveal-item">Premium Stay Experience</span>
+
+        <h1 class="hero-title">
+          <span class="reveal-item delay-1">Wake Up to</span>
+          <span class="reveal-item delay-2">Comfort, Calm</span>
+          <span class="reveal-item delay-3">&amp; Scenic Beauty</span>
+        </h1>
+
+        <p class="hero-subtitle reveal-item delay-4">
+          Enjoy a relaxing stay with warm hospitality, modern comfort, and
+          peaceful surroundings designed for every traveller.
+        </p>
+
+        <div class="hero-actions reveal-item delay-5">
+          <a href="#" class="hero-btn hero-btn-primary">Book Your Stay</a>
+          <a href="#" class="hero-btn hero-btn-secondary">View Rooms</a>
+        </div>
+      </div>
+    </div>
+
+    <a href="#next-section" class="scroll-indicator" aria-label="Scroll down">
+      <span class="scroll-mouse"></span>
+      <span class="scroll-label">Scroll</span>
+    </a>
+  </section>
+
+  <script>
+    const hero = document.getElementById('hero');
+    const bg = document.querySelector('.hero-bg');
+    const layerOne = document.querySelector('.layer-one');
+    const layerTwo = document.querySelector('.layer-two');
+    const contentCard = document.querySelector('.hero-content');
+    const particlesWrap = document.getElementById('particles');
+
+    function createParticles(count = 26) {
+      for (let i = 0; i < count; i++) {
+        const p = document.createElement('span');
+        p.className = 'particle';
+
+        const size = (Math.random() * 4 + 2).toFixed(2) + 'px';
+        const x = (Math.random() * 100).toFixed(2) + '%';
+        const y = (Math.random() * 100).toFixed(2) + '%';
+        const drift = ((Math.random() * 100) - 50).toFixed(2) + 'px';
+        const duration = (Math.random() * 12 + 14).toFixed(2) + 's';
+        const delay = (Math.random() * 10).toFixed(2) + 's';
+        const blur = (Math.random() * 1.6).toFixed(2) + 'px';
+        const peak = (Math.random() * 0.4 + 0.6).toFixed(2);
+
+        p.style.setProperty('--size', size);
+        p.style.setProperty('--x', x);
+        p.style.setProperty('--y', y);
+        p.style.setProperty('--drift', drift);
+        p.style.setProperty('--duration', duration);
+        p.style.setProperty('--delay', delay);
+        p.style.setProperty('--blur', blur);
+        p.style.setProperty('--peak', peak);
+
+        particlesWrap.appendChild(p);
+      }
+    }
+
+    createParticles();
+
+    let currentX = 0, currentY = 0;
+    let targetX = 0, targetY = 0;
+
+    function animateParallax() {
+      currentX += (targetX - currentX) * 0.09;
+      currentY += (targetY - currentY) * 0.09;
+
+      const dx = currentX;
+      const dy = currentY;
+
+      if (bg) {
+        bg.style.transform =
+          `scale(1.14) translate3d(${dx * -10}px, ${dy * -10}px, 0)`;
+      }
+      if (layerOne) {
+        layerOne.style.transform =
+          `translate3d(${dx * 22}px, ${dy * 22}px, 0)`;
+      }
+      if (layerTwo) {
+        layerTwo.style.transform =
+          `translate3d(${dx * 32}px, ${dy * 32}px, 0)`;
+      }
+      if (contentCard) {
+        contentCard.style.transform =
+          `translate3d(${dx * 12}px, ${dy * 10}px, 0)`;
+      }
+
+      requestAnimationFrame(animateParallax);
+    }
+
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = x;
+      targetY = y;
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      targetX = 0;
+      targetY = 0;
+    });
+
+    animateParallax();
+  </script>
+</body>
+</html>
